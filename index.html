@@ -46,12 +46,12 @@
         
         <section class="hero">
             <h1 class="hero-title">Эффективные решения для вашего бизнеса</h1>
-            <button class="button-primary" type="button">Заказать услугу</button>
+            <button data-modal-open class="button-primary" type="button">Заказать услугу</button>
         </section>
         
         <!-- block Description-->
         
-        <section class="description container">
+        <section class="description container"> 
             <ul class="description-list list">
                 <li class="descrption-item1">
                     <h3 class="title-description">Внимание к деталям</h3>
@@ -71,16 +71,42 @@
                 </li>
             </ul>
         </section>
-        
+
+        <!--Modal window-->
+
+        <div data-modal class="backdrop is-hidden">
+            <div class="modal">
+                <button data-modal-close class="modal-close" type="button">
+                    <svg class="vector" width="11" height="11">
+                        <use href="./images-main/sprite.svg#icon-VectorX"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
         <!--block our work-->
         
         <section class="our-work container">
             <div class="work">
                 <h2 class="title-work-team">Чем мы занимаемся</h2>
                 <ul class="work-list list">
-                    <li class="work-item"><img src="./images-main/verstka.png" alt="verstka of webpages" width="370"></li>
-                    <li class="work-item"><img src="./images-main/uxui.png" alt="uxui design" width="370"></li>
-                    <li class="work-item"><img src="./images-main/webdesign.png" alt="webdesign" width="370"></li>
+                    <li class="work-item">
+                        <img src="./images-main/verstka.png" alt="verstka of webpages" width="370">
+                        <div class="work-overlay">
+                            <p class="overlay-text">Десктопные приложения</p>
+                        </div>
+                    </li>
+                    <li class="work-item">
+                        <img src="./images-main/uxui.png" alt="uxui design" width="370">
+                        <div class="work-overlay">
+                            <p class="overlay-text">Мобильные приложения</p>
+                        </div>
+                    </li>
+                    <li class="work-item">
+                        <img src="./images-main/webdesign.png" alt="webdesign" width="370">
+                        <div class="work-overlay">
+                            <p class="overlay-text">Дизайнерские решения</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -347,6 +373,6 @@
             </div>
         </footer>
     </main>
-
+<script src="./js/modal.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@
   --main-text-family: roboto, sans-serif;
   --main-text-weight: 400;
   --svg-color: #afb1b8;
+  --cubic: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -90,15 +91,29 @@ ul {
 
 .nav-link {
   display: block;
+  position: relative;
   padding-top: 32px;
   padding-bottom: 32px;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.15;
   color: var(--title-text-color);
+
+  transition: color 250ms var(--cubic);
 }
 .nav-link.current {
   color: var(--link-text-color);
+}
+.nav-link.current::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+  background-color: var(--link-text-color);
+  border-radius: 2px;
 }
 .navbar {
   display: flex;
@@ -124,9 +139,12 @@ ul {
   margin-right: 10px;
   width: 20px;
   height: 18px;
+
+  transition: fill 250ms var(--cubic);
 }
 
-.mail-icon:hover {
+.mail-icon:hover,
+.mail-icon:focus {
   fill: var(--link-text-color);
 }
 
@@ -135,6 +153,8 @@ ul {
   margin-right: 10px;
   width: 12px;
   height: 18px;
+
+  transition: fill 250ms var(--cubic);
 }
 .smartphone-icon:hover {
   fill: var(--link-text-color);
@@ -161,17 +181,15 @@ ul {
   align-items: center;
   font-weight: 500;
   color: var(--main-text-color);
+
+  transition: color 250ms var(--cubic);
 }
-.contact-link-head:hover {
-  fill: var(--link-text-color);
-}
+
 .item {
   display: inline-flex;
   align-items: center;
 }
-.item:hover {
-  color: var(--link-text-color);
-}
+
 .contact-link-head:focus,
 .contact-link-head:hover {
   color: var(--link-text-color);
@@ -182,6 +200,9 @@ ul {
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 200px;
+  padding-bottom: 200px;
+
   background-image: linear-gradient(
       to right,
       rgba(47, 48, 58, 0.4),
@@ -192,8 +213,6 @@ ul {
   background-position: center;
   background-size: cover;
   text-align: center;
-  padding-top: 200px;
-  padding-bottom: 200px;
 }
 
 .hero-title {
@@ -224,6 +243,8 @@ ul {
   padding-right: 32px;
   padding-top: 10px;
   padding-bottom: 10px;
+
+  transition: color 250ms var(--cubic);
 }
 
 .button-primary:hover,
@@ -307,6 +328,76 @@ ul {
   margin-bottom: 30px;
   border-radius: 4px;
 }
+
+/* modal Window*/
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+}
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.modal {
+  position: fixed;
+  z-index: 1;
+  opacity: 1;
+  top: 25%;
+  left: 37%;
+
+  width: 528px;
+  height: 581px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 3px;
+
+  transition: transform 250ms var(--cubic) ease-in-out;
+
+  animation-name: animationmodal;
+  animation-duration: 2000ms;
+  animation-timing-function: linear;
+}
+
+@keyframes animationmodal {
+  0% {
+    transform: rotate3d(0, 0, 0, 45deg);
+  }
+  50% {
+    transform: rotate3d(1, 1, 1, 220deg);
+  }
+  100% {
+    transform: rotate3d(2, 2, 2, 360deg);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.vektor {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  fill: rgba(0, 0, 0, 1);
+
+  transition: fill 250ms var(--cubic);
+}
+.vektor:hover,
+.vektor:focus {
+  fill: var(--link-text-color);
+}
 /* Our work*/
 
 .title-work-team {
@@ -332,6 +423,39 @@ ul {
 .work-list .work-item:not(:last-child) {
   margin-right: 30px;
   display: block;
+}
+.work-item {
+  position: relative;
+  overflow: hidden;
+}
+.work-item:focus .work-overlay,
+.work-item:hover .work-overlay {
+  transform: translateY(-100%);
+}
+.work-overlay {
+  position: absolute;
+  bottom: -70px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: rgba(47, 48, 58, 0.8);
+
+  transition: transform 250ms var(--cubic);
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 1);
 }
 
 /*Our team*/
@@ -386,6 +510,8 @@ ul {
   border-radius: 50%;
   background-color: var(--white-color);
   align-items: center;
+
+  transition: background-color 250ms var(--cubic), color 250ms var(--cubic);
 }
 .social-link:hover,
 .social-link:focus {
@@ -426,9 +552,11 @@ ul {
   height: 92px;
   border: 1px solid rgba(175, 177, 184, 1);
   border-radius: 5px;
+
+  transition: border-color 250ms var(--cubic), color 250ms var(--cubic);
 }
-.client-link:hover,
-.client-link:focus {
+
+.client-link:hover {
   border-color: #2196f3;
   color: #2196f3;
 }
@@ -439,8 +567,13 @@ ul {
   width: 106px;
   height: 60px;
   fill: #afb1b8;
-}
 
+  transition: fill 250ms var(--cubic);
+}
+.client:focus,
+.client:hover {
+  fill: currentColor;
+}
 /* Footer*/
 
 .footer {
@@ -478,6 +611,8 @@ ul {
   font-size: 14px;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.6);
+
+  transition: color 250ms var(--cubic);
 }
 
 .contact-link-foot:focus,
@@ -511,7 +646,10 @@ ul {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
   align-items: center;
+
+  transition: color 250ms var(--cubic);
 }
+
 .foot-link:hover {
   background-color: var(--link-text-color);
 }
@@ -555,6 +693,10 @@ ul {
 }
 .portfolio-link {
   display: block;
+  position: relative;
+  overflow: hidden;
+
+  transition: box-shadow 250ms var(--cubic);
 }
 
 .portfolio-link:hover,
@@ -575,6 +717,9 @@ ul {
   background-color: var(--button-color);
   color: var(--title-text-color);
   text-align: center;
+
+  transition: background-color 250ms var(--cubic), color 250ms var(--cubic),
+    box-shadow 250ms var(--cubic);
 }
 
 .button-secondary:hover,
@@ -584,12 +729,42 @@ ul {
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
 }
-
+.thumb {
+  position: relative;
+  overflow: hidden;
+}
+.thumb:hover .portfolio-overlay,
+.thumb:focus .portfolio-overlay {
+  transform: translateY(-100%);
+}
 .picture {
+  position: relative;
   display: block;
   width: -webkit-fill-available;
   max-width: 100%;
+  overflow: hidden;
 }
+.portfolio-overlay {
+  position: absolute;
+  top: 294px;
+  left: 0;
+  width: 100%;
+  height: 294px;
+  padding: 63px 24px;
+
+  line-height: 1.6;
+  color: var(--white-color);
+  font-size: 18px;
+  background-color: rgba(33, 117, 243, 0.9);
+
+  transition: transform 250ms var(--cubic);
+}
+
+.portfolio-overlay-text {
+  position: absolute;
+  text-align: left;
+}
+
 .project-item {
   padding: 20px 24px;
   border-right: 1px solid #eeeeee;
